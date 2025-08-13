@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabajo Comunal Estudiantil - Colegio</title>
+    <!-- Importación de la fuente Poppins desde Google Fonts para un diseño moderno -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Variables CSS para una paleta de colores armoniosa y fácil de mantener */
+        :root {
+            --color-primario: #66B3FF; /* Azul cielo vibrante */
+            --color-secundario: #A7D9FF; /* Azul más claro, para detalles */
+            --color-fondo: #E0F2FF; /* Azul muy claro para el fondo general */
+            --color-texto-oscuro: #2C3E50; /* Azul oscuro casi negro, para textos principales */
+            --color-texto-claro: #FFFFFF; /* Blanco, para textos sobre fondos oscuros */
+            --color-exito: #28A745; /* Verde para mensajes de éxito */
+            --color-advertencia: #FFC107; /* Amarillo para mensajes de advertencia */
+            --color-error: #DC3545; /* Rojo para mensajes de error */
+            --color-gris-claro: #F8F9FA; /* Gris muy claro, para fondos de tarjetas */
+            --color-gris-medio: #CED4DA; /* Gris para bordes y separadores */
+        }
+
+        /* Estilos generales para resetear y aplicar una fuente base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif; /* Aplicación de la fuente Poppins */
+        }
+
+        /* Estilos del cuerpo de la página */
+        body {
+            background-color: var(--color-fondo);
+            color: var(--color-texto-oscuro);
+            line-height: 1.6;
+            position: relative;
+            min-height: 100vh; /* Asegura que el fondo cubra toda la altura de la ventana */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Centra el contenido verticalmente */
+            align-items: center; /* Centra el contenido horizontalmente */
+            padding: 20px; /* Espaciado interno para evitar que el contenido toque los bordes */
+        }
+
+        /* Pseudo-elemento para la imagen de fondo con baja opacidad y efecto sutil */
+        body::before {
+            content: "";
+            background-image: url('data:image/jpeg;base64,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'); /* URL de la imagen de fondo */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1; /* Asegura que la imagen esté detrás del contenido */
+            opacity: 0.08; /* Opacidad muy sutil para no distraer */
+        }
+
+        /* Contenedor principal de la aplicación */
+        .contenedor {
+            max-width: 1000px; /* Ancho máximo del contenedor */
+            width: 100%; /* Ocupa todo el ancho disponible hasta el max-width */
+            margin: 20px auto; /* Margen superior/inferior y centrado horizontal */
+            padding: 20px; /* Espaciado interno */
+            background-color: rgba(255, 255, 255, 0.95); /* Fondo blanco semi-transparente */
+            border-radius: 15px; /* Bordes redondeados */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* Sombra para dar profundidad */
+            backdrop-filter: blur(5px); /* Efecto de desenfoque para el fondo detrás del contenedor */
+        }
+
+        /* Estilos del encabezado */
+        .encabezado {
+            display: flex; /* Usa flexbox para alinear elementos */
+            align-items: center; /* Centra verticalmente los elementos */
+            background-color: var(--color-primario);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            color: var(--color-texto-claro); /* Color de texto para el encabezado */
+        }
+
+        /* Estilos del escudo del colegio */
+        .escudo-colegio {
+            width: 100px;
+            height: 100px;
+            margin-right: 25px;
+            border-radius: 50%; /* Forma circular */
+            object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+            border: 4px solid var(--color-texto-claro); /* Borde alrededor del escudo */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Estilos del título principal */
+        .titulo-principal {
+            font-size: 2.5rem;
+            font-weight: 700; /* Negrita */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2); /* Sombra de texto para mejor legibilidad */
+        }
+
+        /* Estilos para las secciones principales (formularios, tablas) */
+        .seccion-card {
+            background-color: var(--color-gris-claro);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Estilos para los títulos dentro de las secciones */
+        .seccion-card h2 {
+            font-size: 1.8rem;
+            color: var(--color-texto-oscuro);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--color-secundario); /* Línea decorativa */
+            padding-bottom: 10px;
+        }
+
+        /* Estilos para cada grupo de formulario (label + input/select) */
+        .grupo-formulario {
+            margin-bottom: 20px;
+        }
+
+        .grupo-formulario label {
+            display: block; /* Hace que el label ocupe su propia línea */
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--color-texto-oscuro);
+        }
+
+        /* Estilos para los campos de entrada de texto y select */
+        .grupo-formulario input,
+        .grupo-formulario select {
+            width: 100%; /* Ocupa todo el ancho disponible */
+            padding: 12px 15px;
+            border: 1px solid var(--color-gris-medio);
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: var(--color-texto-claro);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves para efectos de enfoque */
+        }
+
+        /* Estilos al enfocar los campos de entrada */
+        .grupo-formulario input:focus,
+        .grupo-formulario select:focus {
+            border-color: var(--color-primario); /* Cambia el color del borde */
+            box-shadow: 0 0 0 3px rgba(102, 179, 255, 0.3); /* Sombra de enfoque */
+            outline: none; /* Elimina el contorno predeterminado del navegador */
+        }
+
+        /* Estilos generales para los botones */
+        .boton {
+            background-color: var(--color-primario);
+            color: var(--color-texto-claro);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer; /* Cambia el cursor a una mano al pasar por encima */
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease; /* Transiciones suaves para todos los cambios */
+            margin-right: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Efecto hover para los botones */
+        .boton:hover {
+            background-color: #4DA6FF; /* Tono más oscuro al pasar el mouse */
+            transform: translateY(-3px); /* Pequeño levantamiento */
+            box-shadow: 0 5px 12px rgba(0,0,0,0.2); /* Sombra más pronunciada */
+        }
+
+        /* Efecto al hacer clic en los botones */
+        .boton:active {
+            transform: translateY(0); /* Vuelve a la posición original */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra original */
+        }
+
+        /* Contenedor de la tabla */
+        .contenedor-tabla {
+            background-color: var(--color-gris-claro);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            overflow-x: auto; /* Permite scroll horizontal si la tabla es muy ancha */
+        }
+
+        /* Estilos de la tabla */
+        table {
+            width: 100%;
+            border-collapse: separate; /* Permite bordes redondeados en celdas */
+            border-spacing: 0; /* Elimina el espacio entre celdas */
+            margin-top: 15px;
+            border-radius: 10px; /* Bordes redondeados para la tabla */
+            overflow: hidden; /* Asegura que los bordes redondeados se apliquen correctamente */
+        }
+
+        /* Estilos para celdas de encabezado y datos */
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--color-gris-medio); /* Separador entre filas */
+        }
+
+        /* Estilos para los encabezados de la tabla */
+        th {
+            background-color: var(--color-primario);
+            color: var(--color-texto-claro);
+            font-weight: 700;
+            position: sticky; /* Encabezados pegajosos al hacer scroll */
+            top: 0; /* Se pegan en la parte superior */
+            z-index: 10; /* Asegura que estén por encima del contenido de la tabla */
+        }
+
+        /* Bordes redondeados específicos para las esquinas de la tabla */
+        th:first-child { border-top-left-radius: 10px; }
+        th:last-child { border-top-right-radius: 10px; }
+        tbody tr:last-child td:first-child { border-bottom-left-radius: 10px; }
+        tbody tr:last-child td:last-child { border-bottom-right-radius: 10px; }
+
+
+        /* Efecto hover para las filas de la tabla */
+        tbody tr:hover {
+            background-color: rgba(102, 179, 255, 0.1); /* Efecto hover más suave */
+        }
+
+        /* Contenedor para los botones de acción (editar/eliminar) */
+        .acciones {
+            display: flex;
+            gap: 8px; /* Espacio entre botones de acción */
+            flex-wrap: wrap; /* Permite que los botones se envuelvan en pantallas pequeñas */
+        }
+
+        /* Estilos específicos para los botones de editar y eliminar */
+        .boton-editar, .boton-eliminar {
+            padding: 8px 12px;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            box-shadow: none; /* Quitar sombra para botones pequeños */
+        }
+
+        .boton-editar {
+            background-color: var(--color-advertencia);
+            color: var(--color-texto-oscuro);
+        }
+
+        .boton-editar:hover {
+            background-color: #FFD740;
+            transform: translateY(-2px);
+        }
+
+        .boton-eliminar {
+            background-color: var(--color-error);
+            color: var(--color-texto-claro);
+        }
+
+        .boton-eliminar:hover {
+            background-color: #E63946;
+            transform: translateY(-2px);
+        }
+
+        /* Estilos para los mensajes de notificación */
+        .mensaje-notificacion {
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            opacity: 0; /* Inicialmente oculto */
+            transition: opacity 0.5s ease-in-out; /* Transición para la aparición/desaparición */
+        }
+
+        /* Clase para mostrar el mensaje */
+        .mensaje-notificacion.mostrar {
+            opacity: 1;
+        }
+
+        /* Clases de tipo para los mensajes de notificación */
+        .mensaje-notificacion.exito {
+            background-color: var(--color-exito);
+            color: var(--color-texto-claro);
+        }
+
+        .mensaje-notificacion.error {
+            background-color: var(--color-error);
+            color: var(--color-texto-claro);
+        }
+
+        .mensaje-notificacion.advertencia {
+            background-color: var(--color-advertencia);
+            color: var(--color-texto-oscuro);
+        }
+
+        /* Estilos para el resumen de horas */
+        .resumen-horas {
+            text-align: right;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid var(--color-secundario);
+            color: var(--color-texto-oscuro);
+        }
+
+        /* Media Queries para Responsividad */
+
+        /* Para pantallas medianas (tabletas) */
+        @media (max-width: 768px) {
+            .encabezado {
+                flex-direction: column; /* Apila los elementos del encabezado */
+                text-align: center;
+                padding: 20px;
+            }
+
+            .escudo-colegio {
+                margin-right: 0;
+                margin-bottom: 15px; /* Espacio debajo del escudo */
+            }
+
+            .titulo-principal {
+                font-size: 2rem;
+            }
+
+            .seccion-card {
+                padding: 20px;
+            }
+
+            th, td {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+
+            .acciones {
+                flex-direction: column; /* Apila los botones de acción */
+                gap: 5px;
+            }
+
+            .boton-editar, .boton-eliminar {
+                width: 100%; /* Ocupan todo el ancho disponible */
+            }
+        }
+
+        /* Para pantallas pequeñas (móviles) */
+        @media (max-width: 480px) {
+            .titulo-principal {
+                font-size: 1.6rem;
+            }
+
+            .escudo-colegio {
+                width: 80px;
+                height: 80px;
+            }
+
+            .boton {
+                width: 100%; /* Los botones principales también ocupan todo el ancho */
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="encabezado">
+            <img src="https://ctpdeaserridiurno.com/wp-content/uploads/2023/06/escudo-sin-fondo_mesa-de-trabajo-1.png?w=750" alt="Escudo del colegio" class="escudo-colegio">
+            <h1 class="titulo-principal">Trabajo Comunal Estudiantil</h1>
+        </div>
+
+        <!-- Contenedor para mostrar mensajes de notificación al usuario -->
+        <div id="notificacion" class="mensaje-notificacion"></div>
+
+        <div class="seccion-card">
+            <h2>Registrar Nuevo Estudiante</h2>
+            <form id="formEstudiante">
+                <!-- Campo oculto para almacenar el ID del estudiante en modo edición -->
+                <input type="hidden" id="estudianteId" value="">
+
+                <div class="grupo-formulario">
+                    <label for="nombre">Nombre del Estudiante</label>
+                    <input type="text" id="nombre" required placeholder="Ej: Juan Pérez">
+                </div>
+                <div class="grupo-formulario">
+                    <label for="seccion">Sección</label>
+                    <select id="seccion" required>
+                        <option value="">Seleccione una sección</option>
+                        <option value="11-1">11-1</option>
+                        <option value="11-2">11-2</option>
+                        <option value="11-3">11-3</option>
+                        <option value="11-4">11-4</option>
+                        <option value="11-5">11-5</option>
+                        <option value="11-6">11-6</option>
+                        <option value="11-7">11-7</option>
+                        <option value="12-1">12-1</option>
+                        <option value="12-2">12-2</option>
+                        <option value="12-3">12-3</option>
+                        <option value="12-4">12-4</option>
+                        <option value="12-5">12-5</option>
+                        <option value="12-6">12-6</option>
+                    </select>
+                </div>
+                <div class="grupo-formulario">
+                    <label for="horas">Horas realizadas</label>
+                    <input type="number" id="horas" min="1" required placeholder="Ej: 40">
+                </div>
+                <button type="submit" class="boton" id="btnGuardar">Agregar Estudiante</button>
+                <!-- Botón para cancelar la edición, inicialmente oculto -->
+                <button type="button" class="boton" id="btnCancelar" style="display: none;">Cancelar Edición</button>
+            </form>
+        </div>
+
+        <div class="seccion-card contenedor-tabla">
+            <h2>Listado de Estudiantes</h2>
+            <!-- Campos de filtro para la tabla -->
+            <div class="grupo-formulario">
+                <label for="filtroNombre">Buscar por Nombre:</label>
+                <input type="text" id="filtroNombre" placeholder="Escriba un nombre para buscar...">
+            </div>
+            <div class="grupo-formulario">
+                <label for="filtroSeccion">Filtrar por Sección:</label>
+                <select id="filtroSeccion">
+                    <option value="">Todas las secciones</option>
+                    <option value="11-1">11-1</option>
+                    <option value="11-2">11-2</option>
+                    <option value="11-3">11-3</option>
+                    <option value="11-4">11-4</option>
+                    <option value="11-5">11-5</option>
+                    <option value="11-6">11-6</option>
+                    <option value="11-7">11-7</option>
+                    <option value="12-1">12-1</option>
+                    <option value="12-2">12-2</option>
+                    <option value="12-3">12-3</option>
+                    <option value="12-4">12-4</option>
+                    <option value="12-5">12-5</option>
+                    <option value="12-6">12-6</option>
+                </select>
+            </div>
+            <table>
+                <thead>
+                    <tr> 
+                        <th>Nombre</th>
+                        <th>Sección</th>
+                        <th>Horas</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpoTabla">
+                    <!-- Los registros de estudiantes se insertarán aquí dinámicamente -->
+                </tbody>
+            </table>
+            <!-- Resumen del total de horas registradas -->
+            <div class="resumen-horas">
+                Total de Horas Registradas: <span id="totalHoras">0</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // El script JavaScript se ejecuta una vez que todo el contenido HTML ha sido cargado
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- 1. Referencias a elementos del DOM ---
+            // Se obtienen referencias a los elementos HTML con los que interactuaremos
+            const formEstudiante = document.getElementById('formEstudiante');
+            const estudianteIdInput = document.getElementById('estudianteId'); // Campo oculto para el ID en edición
+            const nombreInput = document.getElementById('nombre');
+            const seccionSelect = document.getElementById('seccion');
+            const horasInput = document.getElementById('horas');
+            const cuerpoTabla = document.getElementById('cuerpoTabla'); // tbody de la tabla
+            const btnGuardar = document.getElementById('btnGuardar'); // Botón de agregar/actualizar
+            const btnCancelar = document.getElementById('btnCancelar'); // Botón de cancelar edición
+            const notificacionDiv = document.getElementById('notificacion'); // Div para mensajes al usuario
+            const totalHorasSpan = document.getElementById('totalHoras'); // Span para mostrar el total de horas
+            const filtroNombreInput = document.getElementById('filtroNombre'); // Input para filtrar por nombre
+            const filtroSeccionSelect = document.getElementById('filtroSeccion'); // Select para filtrar por sección
+
+            // Array que almacenará todos los objetos de estudiante
+            // Se inicializa con los datos guardados en localStorage o un array vacío si no hay datos
+            let estudiantes = [];
+
+            // --- 2. Funciones de Utilidad ---
+
+            /**
+             * @function mostrarNotificacion
+             * @description Muestra un mensaje de notificación al usuario en la parte superior de la página.
+             * El mensaje desaparece automáticamente después de un tiempo.
+             * @param {string} mensaje - El texto que se mostrará en la notificación.
+             * @param {string} tipo - El tipo de mensaje ('exito', 'error', 'advertencia') para aplicar estilos CSS.
+             */
+            function mostrarNotificacion(mensaje, tipo) {
+                notificacionDiv.textContent = mensaje; // Establece el texto del mensaje
+                // Asigna clases CSS para el estilo y para hacer visible el mensaje
+                notificacionDiv.className = `mensaje-notificacion mostrar ${tipo}`;
+                // Configura un temporizador para ocultar el mensaje después de 3 segundos
+                setTimeout(() => {
+                    notificacionDiv.classList.remove('mostrar'); // Elimina la clase 'mostrar' para ocultarlo
+                }, 3000);
+            }
+
+            /**
+             * @function cargarEstudiantes
+             * @description Carga el array de estudiantes desde el localStorage del navegador.
+             * Si no hay datos guardados, inicializa el array como vacío.
+             * Luego, llama a renderizarTabla para mostrar los estudiantes.
+             */
+            function cargarEstudiantes() {
+                // Intenta parsear los datos JSON de 'estudiantes' desde localStorage
+                // Si no hay datos (null), usa un array vacío como valor predeterminado
+                try {
+                    estudiantes = JSON.parse(localStorage.getItem('estudiantes')) || [];
+                } catch (e) {
+                    estudiantes = [];
+                    console.error('Error al leer datos guardados:', e);
+                }
+                renderizarTabla(); // Muestra los estudiantes cargados en la tabla
+            }
+
+            /**
+             * @function guardarEstudiantes
+             * @description Guarda el array actual de estudiantes en el localStorage.
+             * El array se convierte a una cadena JSON antes de guardarse.
+             */
+            function guardarEstudiantes() {
+                localStorage.setItem('estudiantes', JSON.stringify(estudiantes));
+            }
+
+            /**
+             * @function calcularTotalHoras
+             * @description Calcula la suma total de horas de trabajo comunal de todos los estudiantes
+             * y actualiza el elemento HTML que muestra este total.
+             */
+            function calcularTotalHoras() {
+                // Usa el método reduce para sumar la propiedad 'horas' de cada estudiante
+                const total = estudiantes.reduce((sum, estudiante) => sum + parseInt(estudiante.horas || 0), 0);
+                totalHorasSpan.textContent = total; // Actualiza el texto del span con el total
+            }
+
+            /**
+             * @function renderizarTabla
+             * @description Dibuja (o redibuja) la tabla de estudiantes en el DOM.
+             * Aplica los filtros de búsqueda y sección antes de mostrar los datos.
+             */
+            function renderizarTabla() {
+                cuerpoTabla.innerHTML = ''; // Limpia el contenido actual del cuerpo de la tabla
+
+                // Obtiene los valores actuales de los campos de filtro
+                const filtroNombre = filtroNombreInput.value.toLowerCase();
+                const filtroSeccion = filtroSeccionSelect.value;
+
+                // Filtra el array de estudiantes basándose en los criterios de búsqueda
+                const estudiantesFiltrados = estudiantes.filter(estudiante => {
+                    // Comprueba si el nombre del estudiante incluye el texto del filtro (insensible a mayúsculas/minúsculas)
+                    const coincideNombre = estudiante.nombre.toLowerCase().includes(filtroNombre);
+                    // Comprueba si la sección del estudiante coincide con el filtro, o si el filtro de sección está vacío
+                    const coincideSeccion = filtroSeccion === '' || estudiante.seccion === filtroSeccion;
+                    return coincideNombre && coincideSeccion; // Retorna true si ambas condiciones se cumplen
+                });
+
+                // Si no hay estudiantes para mostrar (después de aplicar filtros)
+                if (estudiantesFiltrados.length === 0) {
+                    const filaVacia = document.createElement('tr');
+                    filaVacia.innerHTML = `<td colspan="4" style="text-align: center; padding: 20px; color: var(--color-texto-oscuro);">No hay estudiantes registrados o que coincidan con la búsqueda.</td>`;
+                    cuerpoTabla.appendChild(filaVacia);
+                } else {
+                    // Itera sobre el array de estudiantes filtrados y crea una fila para cada uno
+                    estudiantesFiltrados.forEach((estudiante, index) => {
+                        const fila = document.createElement('tr');
+                        // Se usa un template string para construir el HTML de la fila
+                        // data-id se usa para identificar el estudiante en el array original al editar/eliminar
+                        fila.innerHTML = `
+                            <td>${estudiante.nombre}</td>
+                            <td>${estudiante.seccion}</td>
+                            <td>${estudiante.horas}</td>
+                            <td class="acciones">
+                                <button class="boton-editar" data-id="${estudiante.id}">Editar</button>
+                                <button class="boton-eliminar" data-id="${estudiante.id}">Eliminar</button>
+                            </td>
+                        `;
+                        cuerpoTabla.appendChild(fila); // Añade la fila al cuerpo de la tabla
+                    });
+                }
+                calcularTotalHoras(); // Recalcula y muestra el total de horas después de renderizar
+            }
+
+            /**
+             * @function limpiarFormulario
+             * @description Resetea todos los campos del formulario de registro/edición
+             * y restaura el estado del botón de guardar a "Agregar Estudiante".
+             */
+            function limpiarFormulario() {
+                formEstudiante.reset(); // Resetea todos los campos del formulario
+                estudianteIdInput.value = ''; // Limpia el campo oculto del ID
+                btnGuardar.textContent = 'Agregar Estudiante'; // Restaura el texto del botón
+                btnCancelar.style.display = 'none'; // Oculta el botón de cancelar edición
+            }
+
+            // --- 3. Event Listeners (Manejadores de Eventos) ---
+
+            // Maneja el evento 'submit' del formulario (cuando se envía)
+            formEstudiante.addEventListener('submit', (e) => {
+                e.preventDefault(); // Previene el comportamiento predeterminado del formulario (recargar la página)
+
+                // Obtiene los valores actuales de los campos del formulario
+                const nombre = nombreInput.value.trim(); // .trim() elimina espacios en blanco al inicio/final
+                const seccion = seccionSelect.value;
+                const horas = parseInt(horasInput.value); // Convierte las horas a un número entero
+                const id = estudianteIdInput.value; // Obtiene el ID del campo oculto (vacío si es nuevo)
+
+                // Validaciones básicas de los campos del formulario
+                // Check for duplicate names (excluding current student being edited)
+                const existeNombre = estudiantes.some(est => 
+                    est.nombre.toLowerCase() === nombre.toLowerCase() && 
+                    (id ? est.id !== id : true)
+                );
+                
+                if (existeNombre) {
+                    mostrarNotificacion('Ya existe un estudiante con ese nombre.', 'error');
+                    return;
+                }
+
+                if (!nombre || seccion === '' || isNaN(horas) || horas <= 0) {
+                    mostrarNotificacion('Por favor, complete todos los campos correctamente (horas deben ser un número positivo).', 'error');
+                    return; // Detiene la ejecución si la validación falla
+                }
+
+                if (id) {
+                    // Si el campo 'id' tiene un valor, estamos en modo EDICIÓN
+                    // Busca el índice del estudiante en el array 'estudiantes' por su ID
+                    const index = estudiantes.findIndex(est => est.id === id);
+                    if (index !== -1) {
+                        // Si el estudiante es encontrado, actualiza sus propiedades
+                        estudiantes[index] = { id, nombre, seccion, horas };
+                        mostrarNotificacion('Estudiante actualizado con éxito.', 'exito');
+                    } else {
+                        mostrarNotificacion('Error: Estudiante no encontrado para actualizar.', 'error');
+                    }
+                } else {
+                    // Si el campo 'id' está vacío, estamos en modo AGREGAR nuevo estudiante
+                    const nuevoEstudiante = {
+                        id: Date.now().toString(), // Genera un ID único basado en la marca de tiempo actual
+                        nombre,
+                        seccion,
+                        horas
+                    };
+                    estudiantes.push(nuevoEstudiante); // Añade el nuevo estudiante al array
+                    mostrarNotificacion('Estudiante agregado con éxito.', 'exito');
+                }
+
+                guardarEstudiantes(); // Guarda el array actualizado en localStorage
+                limpiarFormulario(); // Limpia el formulario para el siguiente registro
+                renderizarTabla(); // Vuelve a dibujar la tabla con los datos actualizados
+            });
+
+            // Maneja los clics en la tabla (para los botones de Editar y Eliminar)
+            cuerpoTabla.addEventListener('click', (e) => {
+                const target = e.target; // El elemento HTML en el que se hizo clic
+                const estudianteId = target.getAttribute('data-id'); // Obtiene el ID del estudiante desde el atributo data-id
+
+                if (target.classList.contains('boton-editar')) {
+                    // Si se hizo clic en un botón de "Editar"
+                    // Busca el estudiante en el array por su ID
+                    const estudianteAEditar = estudiantes.find(est => est.id === estudianteId);
+                    if (estudianteAEditar) {
+                        // Rellena los campos del formulario con los datos del estudiante a editar
+                        nombreInput.value = estudianteAEditar.nombre;
+                        seccionSelect.value = estudianteAEditar.seccion;
+                        horasInput.value = estudianteAEditar.horas;
+                        estudianteIdInput.value = estudianteAEditar.id; // Establece el ID en el campo oculto
+
+                        btnGuardar.textContent = 'Actualizar Estudiante'; // Cambia el texto del botón de guardar
+                        btnCancelar.style.display = 'inline-block'; // Muestra el botón de cancelar
+                        nombreInput.focus(); // Pone el foco en el campo de nombre para facilitar la edición
+                    }
+                } else if (target.classList.contains('boton-eliminar')) {
+                    // Si se hizo clic en un botón de "Eliminar"
+                    // Busca el índice del estudiante en el array por su ID
+                    const index = estudiantes.findIndex(est => est.id === estudianteId);
+                    if (index !== -1) {
+                        // Pide confirmación al usuario antes de eliminar
+                        if (confirm(`¿Está seguro que desea eliminar a ${estudiantes[index].nombre}? Esta acción no se puede deshacer.`)) {
+                    mostrarNotificacion('Estudiante eliminado correctamente.', 'exito');
+                            estudiantes.splice(index, 1); // Elimina el estudiante del array
+                            guardarEstudiantes(); // Guarda el array actualizado en localStorage
+                            renderizarTabla(); // Vuelve a dibujar la tabla
+                            mostrarNotificacion('Estudiante eliminado con éxito.', 'exito');
+                            limpiarFormulario(); // Limpia el formulario por si se estaba editando el estudiante eliminado
+                        }
+                    }
+                }
+            });
+
+            // Maneja el clic en el botón "Cancelar Edición"
+            btnCancelar.addEventListener('click', () => {
+                limpiarFormulario(); // Limpia el formulario y restaura el estado
+                mostrarNotificacion('Edición cancelada.', 'advertencia');
+            });
+
+            // Maneja los eventos de los campos de filtro para actualizar la tabla en tiempo real
+            filtroNombreInput.addEventListener('input', renderizarTabla); // 'input' se dispara con cada cambio de texto
+            filtroSeccionSelect.addEventListener('change', renderizarTabla); // 'change' se dispara cuando se selecciona una nueva opción
+
+            // --- 4. Inicialización ---
+            // Llama a cargarEstudiantes al cargar la página para mostrar los datos guardados
+            cargarEstudiantes();
+        });
+    </script>
+</body>
+</html>
